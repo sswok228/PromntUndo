@@ -12,27 +12,58 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    color: #fff;
+  }
+  header {
+    background: #4b0082;
+    width: 95%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 15px 30px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+  .header-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px #fff, 0 0 20px #d8b4fe;
+    letter-spacing: 1px;
+  }
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    text-align: center;
+    padding: 0 20px;
   }
   h1 {
     font-size: 4rem;
     text-shadow: 0 0 20px #fff, 0 0 40px #d8b4fe;
     letter-spacing: 2px;
-    text-align: center;
+    margin-bottom: 20px;
   }
   p {
-    margin-top: 20px;
     font-size: 1.3rem;
     opacity: 0.85;
-    text-align: center;
     max-width: 600px;
   }
 </style>
 </head>
 <body>
-  <h1>Promt Undo ❄️</h1>
-  <p>Добро пожаловать. Здесь начинается твой путь.</p>
+
+  <header>
+    <div class="header-title">Promt Undo ❄️</div>
+  </header>
+
+  <main>
+    <h1>Promt Undo ❄️</h1>
+    <p>Добро пожаловать. Здесь начинается твой путь.</p>
+  </main>
+
 </body>
-  </html>
+</html>
