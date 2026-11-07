@@ -3,199 +3,105 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Promt Undo ❄️</title>
-<!-- Подключаем современный шрифт Inter (как в Apple и Telegram) -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<title>Glass Background</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
   body {
-    /* Более насыщенный и современный градиент */
-    background: linear-gradient(-45deg, #0f021a, #2a0845, #511b8a, #1a052e);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    
-    font-family: 'Inter', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    color: #fff;
-    overflow-x: hidden;
-  }
-
-  @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* Эффект матового стекла для шапки (25% прозрачности) */
-  header {
-    background: rgba(20, 4, 33, 0.75); /* 75% непрозрачности = 25% прозрачности */
-    backdrop-filter: blur(15px); /* Размытие заднего фона (современно) */
-    -webkit-backdrop-filter: blur(15px);
-    
-    width: 92%;
-    max-width: 800px;
-    margin: 25px auto 0;
-    padding: 15px 25px;
-    border-radius: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* Тонкая светлая рамка для объема */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-    
-    position: relative;
-    z-index: 10;
-  }
-
-  .header-title {
-    font-size: 1.6rem;
-    font-weight: 900;
-    letter-spacing: 1.5px;
-    /* Убираем старый текст-шэдоу, делаем чистый белый цвет */
-    color: #ffffff; 
-  }
-
-  /* Кнопка меню (три фиолетовые полоски) */
-  .menu-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding: 5px;
-    z-index: 12;
-  }
-
-  .menu-btn span {
-    display: block;
-    width: 28px;
-    height: 3px;
-    /* Современный светло-фиолетовый цвет */
-    background-color: #d8b4fe; 
-    border-radius: 5px;
-    transition: all 0.3s ease;
-  }
-
-  /* Анимация полочек при наведении */
-  .menu-btn:hover span {
-    background-color: #ffffff;
-  }
-
-  /* Плавная шторка */
-  .curtain {
-    background: rgba(20, 4, 33, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: 0;
+    background-color: #050505; /* Глубокий черный */
+    height: 100vh;
     overflow: hidden;
-    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-top: none;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8); 
-    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  /* Тёмный градиент на стыке (как ты просил) */
-  .curtain::before {
-    content: '';
+  /* Контейнер для волн */
+  .waves-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 25px;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
   }
 
-  .curtain.open {
-    height: 250px; 
+  /* Общие настройки для извилистых полос */
+  .wave {
+    position: absolute;
+    width: 200vw;
+    height: 200vh;
+    top: -50vh;
+    left: -50vw;
+    border-radius: 40%; /* Делает края волны закругленными */
+    opacity: 0.15; /* Не сильно яркие */
+    filter: blur(40px); /* Размытие для эффекта "стекла" */
   }
 
-  .curtain-content {
-    padding: 30px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  /* Настройки для разных волн (разная скорость и направление) */
+  .wave-1 {
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+    animation: rotateWave 15s infinite linear;
   }
 
-  .curtain-content a {
-    color: #d8b4fe;
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 700;
-    padding: 12px 15px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.03);
-    transition: all 0.2s;
+  .wave-2 {
+    background: radial-gradient(circle, rgba(200,200,200,0.6) 0%, rgba(200,200,200,0) 70%);
+    animation: rotateWave 20s infinite linear reverse;
+    opacity: 0.1;
   }
 
-  .curtain-content a:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    transform: translateX(5px);
+  .wave-3 {
+    background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 60%);
+    animation: rotateWave 25s infinite linear;
+    opacity: 0.08;
   }
 
-  main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0 20px;
+  /* Эффект стеклянного блика поверх всего */
+  .glass-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    /* Полупрозрачный градиент, имитирующий стекло */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.5) 100%);
+    backdrop-filter: blur(10px); /* Размытие фона */
+    -webkit-backdrop-filter: blur(10px);
+    pointer-events: none; /* Чтобы не мешало кликам, если будут */
   }
 
-  p {
-    font-size: 1.2rem;
-    font-weight: 400;
-    opacity: 0.7;
-    max-width: 600px;
-    line-height: 1.5;
+  /* Анимация вращения волн, чтобы создавался эффект "извилистости" */
+  @keyframes rotateWave {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    50% {
+      transform: rotate(180deg) scale(1.2);
+    }
+    100% {
+      transform: rotate(360deg) scale(1);
+    }
   }
 
 </style>
 </head>
 <body>
 
-  <header>
-    <div class="header-title">Promt Undo ❄️</div>
-    
-    <button class="menu-btn" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+  <!-- Контейнер с волнами -->
+  <div class="waves-container">
+    <div class="wave wave-1"></div>
+    <div class="wave wave-2"></div>
+    <div class="wave wave-3"></div>
+  </div>
 
-    <div class="curtain" id="myCurtain">
-      <div class="curtain-content">
-        <a href="#">Главная</a>
-        <a href="#">О проекте</a>
-        <a href="#">Настройки</a>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <p>Добро пожаловать. Здесь начинается твой путь.</p>
-  </main>
-
-  <script>
-    function toggleMenu() {
-      var curtain = document.getElementById("myCurtain");
-      curtain.classList.toggle("open");
-    }
-  </script>
+  <!-- Стеклянный слой поверх -->
+  <div class="glass-overlay"></div>
 
 </body>
 </html>
