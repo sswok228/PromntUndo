@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Glass Background</title>
+<title>Glass Gradient Background</title>
 <style>
   * {
     margin: 0;
@@ -12,7 +12,8 @@
   }
 
   body {
-    background-color: #050505; /* Глубокий черный */
+    /* Темный градиентный фон на заднем плане */
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
     height: 100vh;
     overflow: hidden;
     display: flex;
@@ -20,7 +21,6 @@
     justify-content: center;
   }
 
-  /* Контейнер для волн */
   .waves-container {
     position: absolute;
     top: 0;
@@ -31,37 +31,36 @@
     overflow: hidden;
   }
 
-  /* Общие настройки для извилистых полос */
+  /* Общие настройки для волн */
   .wave {
     position: absolute;
     width: 200vw;
     height: 200vh;
     top: -50vh;
     left: -50vw;
-    border-radius: 40%; /* Делает края волны закругленными */
-    opacity: 0.15; /* Не сильно яркие */
-    filter: blur(40px); /* Размытие для эффекта "стекла" */
+    border-radius: 40%; /* Скругляем углы, чтобы получить волну */
+    filter: blur(60px); /* Сильное размытие для мягкости */
   }
 
-  /* Настройки для разных волн (разная скорость и направление) */
+  /* Градиентная волна 1 (перелив от белого к прозрачному) */
   .wave-1 {
-    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
     animation: rotateWave 15s infinite linear;
   }
 
+  /* Градиентная волна 2 (перелив от серого к прозрачному, работает в обратную сторону) */
   .wave-2 {
-    background: radial-gradient(circle, rgba(200,200,200,0.6) 0%, rgba(200,200,200,0) 70%);
-    animation: rotateWave 20s infinite linear reverse;
-    opacity: 0.1;
+    background: radial-gradient(circle at 30% 70%, rgba(180, 180, 180, 0.3) 0%, rgba(180, 180, 180, 0) 70%);
+    animation: rotateWave 22s infinite linear reverse;
   }
 
+  /* Градиентная волна 3 (темно-серый перелив для объема) */
   .wave-3 {
-    background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 60%);
-    animation: rotateWave 25s infinite linear;
-    opacity: 0.08;
+    background: radial-gradient(circle at 70% 30%, rgba(100, 100, 100, 0.4) 0%, rgba(100, 100, 100, 0) 60%);
+    animation: rotateWave 30s infinite linear;
   }
 
-  /* Эффект стеклянного блика поверх всего */
+  /* Стеклянный слой (Glassmorphism) */
   .glass-overlay {
     position: absolute;
     top: 0;
@@ -69,20 +68,20 @@
     width: 100%;
     height: 100%;
     z-index: 2;
-    /* Полупрозрачный градиент, имитирующий стекло */
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.5) 100%);
-    backdrop-filter: blur(10px); /* Размытие фона */
-    -webkit-backdrop-filter: blur(10px);
-    pointer-events: none; /* Чтобы не мешало кликам, если будут */
+    /* Плавный градиент поверх волн, имитирующий блик на стекле */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 40%, rgba(0, 0, 0, 0.6) 100%);
+    backdrop-filter: blur(15px); /* Размытие */
+    -webkit-backdrop-filter: blur(15px);
+    pointer-events: none;
   }
 
-  /* Анимация вращения волн, чтобы создавался эффект "извилистости" */
+  /* Анимация вращения и пульсации (чтобы волны извивались) */
   @keyframes rotateWave {
     0% {
       transform: rotate(0deg) scale(1);
     }
     50% {
-      transform: rotate(180deg) scale(1.2);
+      transform: rotate(180deg) scale(1.1);
     }
     100% {
       transform: rotate(360deg) scale(1);
@@ -93,14 +92,12 @@
 </head>
 <body>
 
-  <!-- Контейнер с волнами -->
   <div class="waves-container">
     <div class="wave wave-1"></div>
     <div class="wave wave-2"></div>
     <div class="wave wave-3"></div>
   </div>
 
-  <!-- Стеклянный слой поверх -->
   <div class="glass-overlay"></div>
 
 </body>
