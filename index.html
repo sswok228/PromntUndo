@@ -6,32 +6,116 @@
 <title>Promt Undo ❄️</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  
   body {
-    background: #6a0dad;
+    background: #2a0845; /* Более тёмный фиолетовый фон */
     font-family: 'Segoe UI', Arial, sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     color: #fff;
+    overflow-x: hidden; /* Убираем горизонтальную прокрутку */
   }
+
+  /* Верхняя панель (полукруглая) */
   header {
-    background: #4b0082;
+    background: #1a052e; /* Ещё темнее для контраста */
     width: 95%;
     max-width: 800px;
-    margin: 20px auto;
-    padding: 15px 30px;
+    margin: 20px auto 0;
+    padding: 15px 20px;
     border-radius: 50px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 10;
   }
+
   .header-title {
     font-size: 1.8rem;
     font-weight: bold;
     text-shadow: 0 0 10px #fff, 0 0 20px #d8b4fe;
     letter-spacing: 1px;
+    margin-left: 10px;
   }
+
+  /* Кнопка меню (три полоски) */
+  .menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    z-index: 12;
+  }
+
+  .menu-btn span {
+    display: block;
+    width: 30px;
+    height: 4px;
+    background-color: #ff3b3b; /* Красный цвет как на рисунке */
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  /* Плавная шторка */
+  .curtain {
+    background: #2a0845; /* Цвет как у фона */
+    position: absolute;
+    top: 100%; /* Появляется прямо под шапкой */
+    left: 0;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.4s ease-in-out;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6); /* Тень на стыке */
+    z-index: 5;
+  }
+
+  /* Тёмный градиент на стыке для эффекта объема */
+  .curtain::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+  }
+
+  /* Класс для открытой шторки */
+  .curtain.open {
+    height: 250px; /* Высота выдвижной панели */
+  }
+
+  .curtain-content {
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .curtain-content a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: background 0.2s;
+  }
+
+  .curtain-content a:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Центральный контент */
   main {
     flex: 1;
     display: flex;
@@ -41,29 +125,62 @@
     text-align: center;
     padding: 0 20px;
   }
+
   h1 {
     font-size: 4rem;
     text-shadow: 0 0 20px #fff, 0 0 40px #d8b4fe;
     letter-spacing: 2px;
     margin-bottom: 20px;
   }
+
   p {
     font-size: 1.3rem;
     opacity: 0.85;
     max-width: 600px;
   }
+
+  /* Скрываем центральную надпись по твоей просьбе */
+  .hide-center-title {
+    display: none;
+  }
+
 </style>
 </head>
 <body>
 
   <header>
     <div class="header-title">Promt Undo ❄️</div>
+    
+    <!-- Кнопка меню -->
+    <button class="menu-btn" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Выдвижная шторка -->
+    <div class="curtain" id="myCurtain">
+      <div class="curtain-content">
+        <a href="#">Главная</a>
+        <a href="#">О проекте</a>
+        <a href="#">Настройки</a>
+      </div>
+    </div>
   </header>
 
+  <!-- Основной контент -->
   <main>
-    <h1>Promt Undo ❄️</h1>
+    <!-- Центральная надпись скрыта -->
+    <h1 class="hide-center-title">Promt Undo ❄️</h1>
     <p>Добро пожаловать. Здесь начинается твой путь.</p>
   </main>
+
+  <script>
+    function toggleMenu() {
+      var curtain = document.getElementById("myCurtain");
+      curtain.classList.toggle("open");
+    }
+  </script>
 
 </body>
 </html>
